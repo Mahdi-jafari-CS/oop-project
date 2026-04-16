@@ -78,9 +78,3 @@ Run:
 java -cp /tmp/oop-build Main
 ```
 
-## Team Workflow Guidance
-
-- Work only in your assigned files from `TODO_ASSIGNMENTS.md`.
-- Do not modify other members' files to avoid merge conflicts.
-- Replace TODO training comments with real implementation when completing tasks.
-- Push to GitHub regularly to keep useful commit history for reporting.
