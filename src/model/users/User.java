@@ -65,7 +65,10 @@ public abstract class User implements Serializable {
     }
     
     public String getFullName() {
-        return firstName + " " + lastName;
+        // TODO: Build and return the user's full name.
+        // Hint: Combine firstName and lastName with one space in between.
+        // Example: "John Doe"
+        return "";
     }
     
     // Abstract method for getting user type
@@ -86,6 +89,9 @@ public abstract class User implements Serializable {
     
     @Override
     public String toString() {
-        return getUserType() + ": " + getFullName() + " (" + username + ")";
+        // TODO: Return a readable one-line summary of the user.
+        // Include: user type, full name, and username.
+        // Example: "Student: John Doe (jdoe)"
+        return "";
     }
 }

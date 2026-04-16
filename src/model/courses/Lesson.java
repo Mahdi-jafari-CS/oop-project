@@ -118,24 +118,18 @@ public class Lesson implements Serializable {
      * Check if this lesson overlaps with another lesson
      */
     public boolean overlapsWith(Lesson other) {
-        if (!this.dayOfWeek.equals(other.dayOfWeek)) return false;
-        if (this.startTime == null || this.endTime == null || 
-            other.startTime == null || other.endTime == null) return false;
-        
-        return !(this.endTime.isBefore(other.startTime) || this.startTime.isAfter(other.endTime));
+        // TODO: Return true when two lessons are on the same day and their time intervals overlap.
+        // Handle null day/time values safely and return false when comparison is impossible.
+        return false;
     }
     
     /**
      * Get lesson schedule as formatted string
      */
     public String getScheduleString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(dayOfWeek.toString()).append(" ");
-        sb.append(startTime != null ? startTime.toString() : "N/A");
-        sb.append(" - ");
-        sb.append(endTime != null ? endTime.toString() : "N/A");
-        sb.append(" in ").append(room);
-        return sb.toString();
+        // TODO: Return schedule in format "DAY HH:mm - HH:mm in ROOM".
+        // Use "N/A" when start/end times are missing.
+        return "";
     }
     
     /**
@@ -168,14 +162,8 @@ public class Lesson implements Serializable {
     
     @Override
     public String toString() {
-        return "Lesson{" +
-                "lessonId='" + lessonId + '\'' +
-                ", type=" + type +
-                ", topic='" + topic + '\'' +
-                ", day=" + dayOfWeek +
-                ", time=" + (startTime != null ? startTime.toString() : "N/A") + 
-                "-" + (endTime != null ? endTime.toString() : "N/A") +
-                ", room='" + room + '\'' +
-                '}';
+        // TODO: Return a compact string representation of the lesson.
+        // Example: "Lesson{id=L001, type=LECTURE, topic=Math, day=MONDAY, time=10:00-12:00, room=201}"
+        return "";
     }
 }

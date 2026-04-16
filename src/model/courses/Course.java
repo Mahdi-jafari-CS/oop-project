@@ -145,16 +145,12 @@ public class Course implements Serializable {
      * @return true if registration successful, false if course is full
      */
     public boolean registerStudent(String studentId) {
-        if (registeredStudentIds.size() >= maxStudents) {
-            return false; // Course is full
-        }
-        
-        if (!registeredStudentIds.contains(studentId)) {
-            registeredStudentIds.add(studentId);
-            return true;
-        }
-        
-        return false; // Student already registered
+        // TODO: Implement registration logic.
+        // Rules:
+        // 1) Return false if course is full.
+        // 2) Add student only if not already registered.
+        // 3) Return true only when a new registration is added.
+        return false;
     }
     
     /**
@@ -196,29 +192,17 @@ public class Course implements Serializable {
      * Get total lesson hours for this course
      */
     public int getTotalLessonHours() {
-        return lessons.stream()
-                .mapToInt(Lesson::getDurationHours)
-                .sum();
+        // TODO: Sum lesson durations in hours across all lessons.
+        return 0;
     }
     
     /**
      * Get course information as formatted string
      */
     public String getCourseInfo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Course ID: ").append(courseId).append("\n");
-        sb.append("Course Name: ").append(courseName).append("\n");
-        sb.append("Description: ").append(description).append("\n");
-        sb.append("Credits: ").append(credits).append("\n");
-        sb.append("Major: ").append(major).append("\n");
-        sb.append("Year Required: ").append(yearRequired).append("\n");
-        sb.append("Instructors: ").append(instructorIds.size()).append("\n");
-        sb.append("Lessons: ").append(lessons.size()).append("\n");
-        sb.append("Registered Students: ").append(registeredStudentIds.size()).append("/").append(maxStudents).append("\n");
-        sb.append("Available Spots: ").append(getAvailableSpots()).append("\n");
-        sb.append("Total Lesson Hours: ").append(getTotalLessonHours()).append("\n");
-        
-        return sb.toString();
+        // TODO: Return a multi-line summary of this course.
+        // Include core metadata, counts (instructors/lessons/students), available spots, and total lesson hours.
+        return "";
     }
     
     @Override
@@ -236,13 +220,8 @@ public class Course implements Serializable {
     
     @Override
     public String toString() {
-        return "Course{" +
-                "courseId='" + courseId + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", credits=" + credits +
-                ", major='" + major + '\'' +
-                ", instructors=" + instructorIds.size() +
-                ", students=" + registeredStudentIds.size() + "/" + maxStudents +
-                '}';
+        // TODO: Return a compact single-line representation of Course.
+        // Example: "Course{id=CS101, name=OOP, credits=5, students=22/30}"
+        return "";
     }
 }

@@ -39,17 +39,14 @@ public class TeacherResearcher extends ResearcherDecorator {
      * Check if this teacher researcher is automatically a researcher (professors are always researchers)
      */
     public boolean isAutoResearcher() {
-        return teacher.isProfessor();
+        // TODO: Delegate to Teacher and return whether this teacher is auto-researcher.
+        return false;
     }
     
     @Override
     public String toString() {
-        return "TeacherResearcher{" +
-                "teacher=" + teacher.getFullName() +
-                ", hIndex=" + getHIndex() +
-                ", papers=" + getResearchPapers().size() +
-                ", projects=" + getResearchProjects().size() +
-                '}';
+        // TODO: Return compact summary with teacher name, h-index, paper count, and project count.
+        return "";
     }
 }
 

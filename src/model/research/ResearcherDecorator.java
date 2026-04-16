@@ -42,21 +42,8 @@ public abstract class ResearcherDecorator implements Researcher {
     
     @Override
     public void calculateHIndex() {
-        // Calculate h-index: max h such that h papers have at least h citations each
-        List<Integer> citations = researchPapers.stream()
-                .map(ResearchPaper::getCitations)
-                .sorted((a, b) -> b - a) // Sort descending
-                .collect(Collectors.toList());
-        
-        int h = 0;
-        for (int i = 0; i < citations.size(); i++) {
-            if (citations.get(i) >= i + 1) {
-                h = i + 1;
-            } else {
-                break;
-            }
-        }
-        this.hIndex = h;
+        // TODO: Recompute hIndex from researchPapers using standard h-index algorithm.
+        this.hIndex = 0;
     }
     
     @Override
@@ -86,21 +73,8 @@ public abstract class ResearcherDecorator implements Researcher {
     
     @Override
     public void printPapers(Comparator<ResearchPaper> comparator) {
-        List<ResearchPaper> sortedPapers = new ArrayList<>(researchPapers);
-        sortedPapers.sort(comparator);
-        
-        System.out.println("Research Papers for " + getResearcherName() + ":");
-        System.out.println("==============================================");
-        for (int i = 0; i < sortedPapers.size(); i++) {
-            ResearchPaper paper = sortedPapers.get(i);
-            System.out.println((i + 1) + ". " + paper.getTitle());
-            System.out.println("   Journal: " + paper.getJournal());
-            System.out.println("   Date: " + paper.getPublicationDate());
-            System.out.println("   Citations: " + paper.getCitations());
-            System.out.println("   Pages: " + paper.getPages());
-            System.out.println("   DOI: " + paper.getDoi());
-            System.out.println();
-        }
+        // TODO: Sort researchPapers using comparator and print a structured numbered list.
+        // Include at least title, journal, publication date, citations, pages, and DOI for each paper.
     }
     
     @Override
@@ -132,27 +106,10 @@ public abstract class ResearcherDecorator implements Researcher {
     
     @Override
     public String getResearcherStatistics() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Researcher Statistics for ").append(getResearcherName()).append("\n");
-        sb.append("============================================\n");
-        sb.append("Researcher ID: ").append(getResearcherId()).append("\n");
-        sb.append("h-index: ").append(hIndex).append("\n");
-        sb.append("Total Papers: ").append(researchPapers.size()).append("\n");
-        sb.append("Total Citations: ").append(getTotalCitations()).append("\n");
-        sb.append("Average Citations per Paper: ").append(String.format("%.2f", getAverageCitationsPerPaper())).append("\n");
-        sb.append("Research Projects: ").append(researchProjects.size()).append("\n");
-        sb.append("Qualifies as Supervisor: ").append(qualifiesAsSupervisor() ? "Yes" : "No").append("\n");
-        
-        if (!researchPapers.isEmpty()) {
-            ResearchPaper mostCited = getMostCitedPaper();
-            if (mostCited != null) {
-                sb.append("\nMost Cited Paper:\n");
-                sb.append("  Title: ").append(mostCited.getTitle()).append("\n");
-                sb.append("  Citations: ").append(mostCited.getCitations()).append("\n");
-            }
-        }
-        
-        return sb.toString();
+        // TODO: Return a detailed multi-line statistics report.
+        // Include identity, h-index, publication/project counts, citation metrics,
+        // supervisor eligibility, and optionally most cited paper details.
+        return "";
     }
     
     /**

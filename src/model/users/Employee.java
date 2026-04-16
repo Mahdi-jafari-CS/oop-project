@@ -48,6 +48,8 @@ public abstract class Employee extends User implements Serializable {
     
     @Override
     public String toString() {
-        return super.toString() + ", Employee ID: " + employeeId + ", Department: " + department;
+        // TODO: Extend User.toString() with employee-specific fields.
+        // Include at least employeeId and department.
+        return "";
     }
 }

@@ -29,9 +29,7 @@ public class NotificationService {
      * Register an observer to receive notifications
      */
     public void registerObserver(NotificationObserver observer) {
-        if (!observers.contains(observer)) {
-            observers.add(observer);
-        }
+        // TODO: Register observer only once (avoid duplicates).
     }
     
     /**
@@ -45,13 +43,8 @@ public class NotificationService {
      * Notify all observers of an event
      */
     public void notifyObservers(String eventType, String message, Object data) {
-        for (NotificationObserver observer : observers) {
-            try {
-                observer.update(eventType, message, data);
-            } catch (Exception e) {
-                System.err.println("Error notifying observer: " + e.getMessage());
-            }
-        }
+        // TODO: Iterate through observers and call update(eventType, message, data).
+        // Use try/catch so one failing observer does not break the notification chain.
     }
     
     /**

@@ -105,13 +105,9 @@ public class ResearchProject implements Serializable {
      * @throws NotResearcherException if the person is not a researcher
      */
     public void addParticipant(String researcherId, boolean isResearcher) throws NotResearcherException {
-        if (!isResearcher) {
-            throw new NotResearcherException(researcherId, "Non-Researcher");
-        }
-        
-        if (!participantIds.contains(researcherId)) {
-            participantIds.add(researcherId);
-        }
+        // TODO: Validate participant role.
+        // If isResearcher is false, throw NotResearcherException.
+        // Otherwise add researcherId only if not already present.
     }
     
     /**
@@ -149,11 +145,9 @@ public class ResearchProject implements Serializable {
      * Get project status based on publications
      */
     public String getProjectStatus() {
-        int paperCount = publishedPapers.size();
-        if (paperCount == 0) return "Planning Phase";
-        if (paperCount < 3) return "Active - Early Stage";
-        if (paperCount < 10) return "Active - Productive";
-        return "Active - Highly Productive";
+        // TODO: Return status based on number of published papers.
+        // Suggested levels: Planning, Early Stage, Productive, Highly Productive.
+        return "";
     }
     
     @Override
@@ -171,43 +165,18 @@ public class ResearchProject implements Serializable {
     
     @Override
     public String toString() {
-        return "ResearchProject{" +
-                "projectId='" + projectId + '\'' +
-                ", topic='" + topic + '\'' +
-                ", participants=" + participantIds.size() +
-                ", papers=" + publishedPapers.size() +
-                ", totalCitations=" + getTotalCitations() +
-                ", budget=" + budget +
-                '}';
+        // TODO: Return compact project summary including id, topic, participant count,
+        // paper count, total citations, and budget.
+        return "";
     }
     
     /**
      * Get detailed project report
      */
     public String getProjectReport() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Research Project Report\n");
-        sb.append("=======================\n");
-        sb.append("Project ID: ").append(projectId).append("\n");
-        sb.append("Topic: ").append(topic).append("\n");
-        sb.append("Description: ").append(description).append("\n");
-        sb.append("Funding Agency: ").append(fundingAgency).append("\n");
-        sb.append("Budget: $").append(String.format("%,.2f", budget)).append("\n");
-        sb.append("Status: ").append(getProjectStatus()).append("\n");
-        sb.append("Participants: ").append(participantIds.size()).append("\n");
-        sb.append("Published Papers: ").append(publishedPapers.size()).append("\n");
-        sb.append("Total Citations: ").append(getTotalCitations()).append("\n");
-        sb.append("Average Citations per Paper: ").append(String.format("%.2f", getAverageCitationsPerPaper())).append("\n");
-        
-        if (!publishedPapers.isEmpty()) {
-            sb.append("\nPublished Papers:\n");
-            for (int i = 0; i < publishedPapers.size(); i++) {
-                ResearchPaper paper = publishedPapers.get(i);
-                sb.append(i + 1).append(". ").append(paper.getTitle())
-                  .append(" (").append(paper.getCitations()).append(" citations)\n");
-            }
-        }
-        
-        return sb.toString();
+        // TODO: Build a detailed, multi-line project report.
+        // Include metadata, status, participant count, publication/citation metrics,
+        // and a numbered list of published papers with citation counts.
+        return "";
     }
 }

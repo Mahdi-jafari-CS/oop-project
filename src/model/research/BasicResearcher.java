@@ -40,21 +40,12 @@ public class BasicResearcher implements Researcher {
     
     @Override
     public void calculateHIndex() {
-        // Simple h-index calculation
-        List<Integer> citations = papers.stream()
-                .map(ResearchPaper::getCitations)
-                .sorted((a, b) -> b - a)
-                .collect(Collectors.toList());
-        
-        int h = 0;
-        for (int i = 0; i < citations.size(); i++) {
-            if (citations.get(i) >= i + 1) {
-                h = i + 1;
-            } else {
-                break;
-            }
-        }
-        this.hIndex = h;
+        // TODO: Implement h-index calculation.
+        // Steps:
+        // 1) Collect citations and sort descending.
+        // 2) Find maximum h where at least h papers have >= h citations.
+        // 3) Store result in this.hIndex.
+        this.hIndex = 0;
     }
     
     @Override
@@ -104,9 +95,8 @@ public class BasicResearcher implements Researcher {
     
     @Override
     public ResearchPaper getMostCitedPaper() {
-        return papers.stream()
-                .max(Comparator.comparingInt(ResearchPaper::getCitations))
-                .orElse(null);
+        // TODO: Return the paper with highest citations, or null when no papers exist.
+        return null;
     }
     
     @Override
@@ -116,6 +106,7 @@ public class BasicResearcher implements Researcher {
     
     @Override
     public String getResearcherStatistics() {
-        return "Researcher: " + name + ", h-index: " + hIndex + ", Papers: " + papers.size();
+        // TODO: Return a concise statistics string with name, h-index, and paper count.
+        return "";
     }
 }

@@ -39,17 +39,14 @@ public class StudentResearcher extends ResearcherDecorator {
      * Check if student is in 4th year and needs a research supervisor
      */
     public boolean needsResearchSupervisor() {
-        return student.needsResearchSupervisor();
+        // TODO: Delegate to underlying Student and return whether supervisor is still needed.
+        return false;
     }
     
     @Override
     public String toString() {
-        return "StudentResearcher{" +
-                "student=" + student.getFullName() +
-                ", hIndex=" + getHIndex() +
-                ", papers=" + getResearchPapers().size() +
-                ", projects=" + getResearchProjects().size() +
-                '}';
+        // TODO: Return compact summary with student name, h-index, paper count, and project count.
+        return "";
     }
 }
 

@@ -37,9 +37,7 @@ public class Teacher extends Employee {
     }
     
     public void addCourseTeaching(String courseId) {
-        if (!coursesTeaching.contains(courseId)) {
-            coursesTeaching.add(courseId);
-        }
+        // TODO: Add courseId to coursesTeaching only if it is not already present.
     }
     
     public void removeCourseTeaching(String courseId) {
@@ -52,7 +50,9 @@ public class Teacher extends Employee {
     
     // Check if this teacher is automatically a researcher (professors are always researchers)
     public boolean isAutoResearcher() {
-        return isProfessor;
+        // TODO: Return true when this teacher should automatically be treated as a researcher.
+        // Hint: professors are auto-researchers in this project.
+        return false;
     }
     
     @Override
@@ -62,6 +62,7 @@ public class Teacher extends Employee {
     
     @Override
     public String toString() {
-        return super.toString() + ", Title: " + title + ", Courses Teaching: " + coursesTeaching.size();
+        // TODO: Extend Employee.toString() with title and number of courses taught.
+        return "";
     }
 }

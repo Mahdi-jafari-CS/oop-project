@@ -123,29 +123,9 @@ public class Mark implements Serializable {
      * Calculate letter grade based on total mark
      */
     private void calculateGrade() {
-        if (totalMark >= 95) {
-            grade = "A+";
-        } else if (totalMark >= 90) {
-            grade = "A";
-        } else if (totalMark >= 85) {
-            grade = "A-";
-        } else if (totalMark >= 80) {
-            grade = "B+";
-        } else if (totalMark >= 75) {
-            grade = "B";
-        } else if (totalMark >= 70) {
-            grade = "B-";
-        } else if (totalMark >= 65) {
-            grade = "C+";
-        } else if (totalMark >= 60) {
-            grade = "C";
-        } else if (totalMark >= 55) {
-            grade = "C-";
-        } else if (totalMark >= 50) {
-            grade = "D";
-        } else {
-            grade = "F";
-        }
+        // TODO: Map totalMark to a letter grade using the existing thresholds.
+        // Keep the final else branch for failing grade "F".
+        grade = "F";
     }
     
     /**
@@ -180,20 +160,9 @@ public class Mark implements Serializable {
      * Get grade points (4.0 scale)
      */
     public double getGradePoints() {
-        switch (grade) {
-            case "A+": return 4.0;
-            case "A": return 4.0;
-            case "A-": return 3.7;
-            case "B+": return 3.3;
-            case "B": return 3.0;
-            case "B-": return 2.7;
-            case "C+": return 2.3;
-            case "C": return 2.0;
-            case "C-": return 1.7;
-            case "D": return 1.0;
-            case "F": return 0.0;
-            default: return 0.0;
-        }
+        // TODO: Return grade points on a 4.0 scale based on letter grade.
+        // Use switch-case and return 0.0 for unknown grades.
+        return 0.0;
     }
     
     /**
@@ -209,15 +178,9 @@ public class Mark implements Serializable {
      * Get mark breakdown as formatted string
      */
     public String getMarkBreakdown() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Mark Breakdown for Student ").append(studentId).append(" in Course ").append(courseId).append(":\n");
-        sb.append("  First Attestation: ").append(String.format("%.1f", firstAttestation)).append("/30\n");
-        sb.append("  Second Attestation: ").append(String.format("%.1f", secondAttestation)).append("/30\n");
-        sb.append("  Final Exam: ").append(String.format("%.1f", finalExam)).append("/40\n");
-        sb.append("  Total Mark: ").append(String.format("%.1f", totalMark)).append("/100\n");
-        sb.append("  Grade: ").append(grade).append(" (Grade Points: ").append(String.format("%.1f", getGradePoints())).append(")\n");
-        sb.append("  Status: ").append(isPassing() ? "PASS" : "FAIL").append("\n");
-        return sb.toString();
+        // TODO: Build and return a formatted multi-line mark report.
+        // Include attestation components, final exam, total, letter grade, grade points, and pass/fail status.
+        return "";
     }
     
     @Override
@@ -236,11 +199,7 @@ public class Mark implements Serializable {
     
     @Override
     public String toString() {
-        return "Mark{" +
-                "studentId='" + studentId + '\'' +
-                ", courseId='" + courseId + '\'' +
-                ", totalMark=" + String.format("%.1f", totalMark) +
-                ", grade='" + grade + '\'' +
-                '}';
+        // TODO: Return a compact summary string with studentId, courseId, totalMark, and grade.
+        return "";
     }
 }

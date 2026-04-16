@@ -15,10 +15,9 @@ public class ResearchPaperComparators {
     public static class ByDateComparator implements Comparator<ResearchPaper> {
         @Override
         public int compare(ResearchPaper p1, ResearchPaper p2) {
-            if (p1.getPublicationDate() == null && p2.getPublicationDate() == null) return 0;
-            if (p1.getPublicationDate() == null) return 1;
-            if (p2.getPublicationDate() == null) return -1;
-            return p2.getPublicationDate().compareTo(p1.getPublicationDate()); // Descending
+            // TODO: Compare by publication date (most recent first).
+            // Handle null dates explicitly so comparator remains null-safe.
+            return 0;
         }
     }
     
@@ -66,20 +65,10 @@ public class ResearchPaperComparators {
      * Get comparator by type name
      */
     public static Comparator<ResearchPaper> getComparator(String type) {
-        switch (type.toLowerCase()) {
-            case "date":
-                return new ByDateComparator();
-            case "citations":
-                return new ByCitationsComparator();
-            case "pages":
-                return new ByPagesComparator();
-            case "title":
-                return new ByTitleComparator();
-            case "impact":
-                return new ByImpactFactorComparator();
-            default:
-                return new ByDateComparator(); // Default
-        }
+        // TODO: Return the comparator strategy based on `type`.
+        // Supported keys: date, citations, pages, title, impact.
+        // Default strategy should be ByDateComparator.
+        return new ByDateComparator();
     }
     
     /**

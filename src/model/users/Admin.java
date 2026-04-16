@@ -27,31 +27,15 @@ public class Admin extends Employee {
     }
     
     public void logUserAction(String action) {
-        String logEntry = java.time.LocalDateTime.now() + " - " + action;
-        userActionsLog.add(logEntry);
-        
-        // Notify observers about user action
-        NotificationService.getInstance().notifyUserAction(
-            getEmployeeId(), 
-            action, 
-            extractUsernameFromAction(action)
-        );
-        
-        // Keep log size reasonable
-        if (userActionsLog.size() > 1000) {
-            userActionsLog.remove(0);
-        }
+        // TODO: Add a timestamped log entry to userActionsLog.
+        // TODO: Notify observers via NotificationService about this action.
+        // TODO: Keep only the latest 1000 entries (remove oldest when limit is exceeded).
     }
     
     private String extractUsernameFromAction(String action) {
-        // Simple extraction: look for patterns like "Added user: username"
-        if (action.contains("Added user: ")) {
-            return action.substring("Added user: ".length());
-        } else if (action.contains("Removed user: ")) {
-            return action.substring("Removed user: ".length());
-        } else if (action.contains("Updated user: ")) {
-            return action.substring("Updated user: ".length());
-        }
+        // TODO: Extract the username from action text patterns:
+        // "Added user: <username>", "Removed user: <username>", "Updated user: <username>".
+        // Return "unknown" if no supported pattern exists.
         return "unknown";
     }
     
@@ -98,6 +82,8 @@ public class Admin extends Employee {
     
     @Override
     public String toString() {
-        return super.toString() + ", Managed Users: " + managedUsers.size() + ", Log Entries: " + userActionsLog.size();
+        // TODO: Extend Employee.toString() with admin metrics.
+        // Include number of managed users and number of log entries.
+        return "";
     }
 }
