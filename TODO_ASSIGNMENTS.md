@@ -11,7 +11,9 @@ Use it as your team implementation queue.
 
 ## Team Rule
 
-- After finishing each task,please replace the TODO guidance comments with the real implementation and remove the training comments .
+- After finishing each task,please replace the TODO guidance comments with the real implementation and remove the training comments.
+- Kindly do not change other members' assigned files to avoid unexpected errors and merge conflicts.
+- Also, after your changes, push regularly to GitHub so we have commit history to include in the report for the teacher.
 
 ## Мамедов Н. Т. - User/Role Logic
 
