@@ -3,7 +3,17 @@
 This file tracks every method intentionally replaced with TODO guidance.
 Use it as your team implementation queue.
 
-## Member 1 - User/Role Logic
+## Team Members
+
+- Мамедов Н. Т. - user and role logic
+- Тайкпанов Р. Р. - course and service logic
+- Каналхан Б. Н. - research engine logic
+
+## Team Rule
+
+- After finishing each task,please replace the TODO guidance comments with the real implementation and remove the training comments .
+
+## Мамедов Н. Т. - User/Role Logic
 
 - src/model/users/User.java
   - getFullName()
@@ -28,7 +38,7 @@ Use it as your team implementation queue.
   - getTranscript()
   - toString()
 
-## Member 2 - Course/Service Logic
+## Тайкпанов Р. Р. - Course/Service Logic
 
 - src/model/courses/Course.java
   - registerStudent(String studentId)
@@ -48,7 +58,7 @@ Use it as your team implementation queue.
   - registerObserver(NotificationObserver observer)
   - notifyObservers(String eventType, String message, Object data)
 
-## Member 3 - Research Engine
+## Каналхан Б. Н. - Research Engine
 
 - src/model/comparators/ResearchPaperComparators.java
   - ByDateComparator.compare(ResearchPaper p1, ResearchPaper p2)

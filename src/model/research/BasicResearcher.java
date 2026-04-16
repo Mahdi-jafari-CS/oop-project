@@ -1,3 +1,4 @@
+// Assigned to: Каналхан Б. Н.
 package model.research;
 
 import java.util.ArrayList;

@@ -1,3 +1,4 @@
+// Assigned to: Каналхан Б. Н.
 package model.comparators;
 
 import model.research.ResearchPaper;

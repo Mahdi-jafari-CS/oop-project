@@ -1,3 +1,4 @@
+// Assigned to: Тайкпанов Р. Р.
 package model.courses;
 
 import model.enums.LessonType;

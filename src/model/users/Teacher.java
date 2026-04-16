@@ -1,3 +1,4 @@
+// Assigned to: Мамедов Н. Т.
 package model.users;
 
 import model.enums.Title;
