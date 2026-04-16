@@ -15,6 +15,17 @@ Use it as your team implementation queue.
 - Kindly do not change other members' assigned files to avoid unexpected errors and merge conflicts.
 - Also, after your changes, push regularly to GitHub so we have commit history to include in the report for the teacher.
 
+## Quick Start (Team)
+
+1. Clone the repo:
+  - `git clone https://github.com/Mahdi-jafari-CS/oop-project.git`
+2. Open the project folder:
+  - `cd oop-project`
+3. Compile:
+  - `javac -d /tmp/oop-build Main.java $(find src -name '*.java' | sort)`
+4. Run:
+  - `java -cp /tmp/oop-build Main`
+  
 ## Мамедов Н. Т. - User/Role Logic
 
 - src/model/users/User.java
@@ -96,3 +107,5 @@ Use it as your team implementation queue.
 
 - src/storage/DataStorage.java (kept as requested)
 - src/ui/ConsoleUI.java (kept large for stability)
+
+
