@@ -139,9 +139,14 @@ public class Student extends User {
      * Register for a course with credit validation
      */
     public void registerForCourse(String courseId, int credits) throws CreditLimitException {
-        // TODO: Validate credit limit before registration.
-        // If totalCredits + credits exceeds MAX_CREDITS, throw CreditLimitException.
-        // TODO: If not already registered, add courseId, store credits, and update totalCredits.
+        if (totalCredits + credits > MAX_CREDITS) {
+            throw new CreditLimitException(getFullName(), totalCredits + credits, MAX_CREDITS);
+        }
+        if (!registeredCourses.contains(courseId)) {
+            registeredCourses.add(courseId);
+            courseCredits.put(courseId, credits);
+            totalCredits += credits;
+        }
     }
     
     /**
@@ -162,19 +167,34 @@ public class Student extends User {
      * Add a mark for a course and update GPA/failed courses count
      */
     public void addCourseMark(String courseId, double mark) throws FailLimitException {
-        // TODO: If mark is below passing threshold, increment failedCoursesCount.
-        // If failedCoursesCount exceeds MAX_FAILED_COURSES, throw FailLimitException.
-        // TODO: Save the mark and recalculate GPA.
+        Double previousMark = courseMarks.get(courseId);
+        if (previousMark != null && previousMark < 50 && mark >= 50) {
+            failedCoursesCount = Math.max(0, failedCoursesCount - 1);
+        }
+        if (mark < 50 && (previousMark == null || previousMark >= 50)) {
+            failedCoursesCount++;
+        }
+        if (failedCoursesCount > MAX_FAILED_COURSES) {
+            throw new FailLimitException(getFullName(), failedCoursesCount, MAX_FAILED_COURSES);
+        }
+        courseMarks.put(courseId, mark);
+        calculateGPA();
     }
     
     /**
      * Calculate GPA based on all course marks
      */
     private void calculateGPA() {
-        // TODO: Recalculate GPA as weighted average using courseMarks and courseCredits.
-        // Formula: sum(mark * credits) / sum(credits)
-        // Handle empty/no-valid-credit cases by setting gpa to 0.0.
-        gpa = 0.0;
+        double totalWeighted = 0.0;
+        int totalCreditHours = 0;
+        for (Map.Entry<String, Double> entry : courseMarks.entrySet()) {
+            int credits = courseCredits.getOrDefault(entry.getKey(), 0);
+            if (credits > 0) {
+                totalWeighted += entry.getValue() * credits;
+                totalCreditHours += credits;
+            }
+        }
+        gpa = totalCreditHours == 0 ? 0.0 : totalWeighted / totalCreditHours;
     }
     
     /**
@@ -188,9 +208,27 @@ public class Student extends User {
      * Get transcript as formatted string
      */
     public String getTranscript() {
-        // TODO: Build and return a formatted transcript string.
-        // Include student header info (name/id/major/year/GPA/credits) and per-course mark + credits.
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Transcript for ").append(getFullName())
+          .append(" (").append(studentId).append(")").append("\n");
+        sb.append("Major: ").append(major).append("\n");
+        sb.append("Year: ").append(year).append("\n");
+        sb.append(String.format("GPA: %.2f, Credits: %d, Failed Courses: %d", gpa, totalCredits, failedCoursesCount)).append("\n");
+        sb.append("Courses:\n");
+        if (registeredCourses.isEmpty()) {
+            sb.append("  None\n");
+        } else {
+            for (String courseId : registeredCourses) {
+                int credits = courseCredits.getOrDefault(courseId, 0);
+                double mark = courseMarks.getOrDefault(courseId, 0.0);
+                sb.append(String.format("  %s - %d credits, Mark: %.1f, %s\n",
+                        courseId,
+                        credits,
+                        mark,
+                        mark >= 50 ? "Pass" : "Fail"));
+            }
+        }
+        return sb.toString();
     }
     
     @Override
@@ -200,7 +238,7 @@ public class Student extends User {
     
     @Override
     public String toString() {
-        // TODO: Extend User.toString() with studentId, year, major, GPA, and credit summary.
-        return "";
+        return String.format("%s, studentId=%s, year=%s, major=%s, GPA=%.2f, credits=%d, failed=%d", 
+                             super.toString(), studentId, year, major, gpa, totalCredits, failedCoursesCount);
     }
 }

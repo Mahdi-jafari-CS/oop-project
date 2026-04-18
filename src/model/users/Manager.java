@@ -53,8 +53,12 @@ public class Manager extends Employee {
     }
     
     public void approveRequest(String requestId) {
-        // TODO: Move requestId from pendingRequests to approvedRequests.
-        // Rule: do this only if requestId exists in pendingRequests.
+        if (pendingRequests.contains(requestId)) {
+            pendingRequests.remove(requestId);
+            if (!approvedRequests.contains(requestId)) {
+                approvedRequests.add(requestId);
+            }
+        }
     }
     
     public List<String> getPendingRequests() {
@@ -78,7 +82,7 @@ public class Manager extends Employee {
     
     @Override
     public String toString() {
-        // TODO: Extend Employee.toString() with managerType and managed department count.
-        return "";
+        return String.format("%s, managerType=%s, managedDepartments=%d", 
+                             super.toString(), managerType, managedDepartments.size());
     }
 }

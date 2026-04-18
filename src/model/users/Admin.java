@@ -2,6 +2,8 @@
 package model.users;
 
 import service.NotificationService;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +30,37 @@ public class Admin extends Employee {
     }
     
     public void logUserAction(String action) {
-        // TODO: Add a timestamped log entry to userActionsLog.
-        // TODO: Notify observers via NotificationService about this action.
-        // TODO: Keep only the latest 1000 entries (remove oldest when limit is exceeded).
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String logEntry = String.format("%s - %s", timestamp, action);
+        userActionsLog.add(logEntry);
+        if (userActionsLog.size() > 1000) {
+            userActionsLog.remove(0);
+        }
+
+        String targetUser = extractUsernameFromAction(action);
+        NotificationService.getInstance().notifyUserAction(getUsername(), action, targetUser);
     }
     
     private String extractUsernameFromAction(String action) {
-        // TODO: Extract the username from action text patterns:
-        // "Added user: <username>", "Removed user: <username>", "Updated user: <username>".
-        // Return "unknown" if no supported pattern exists.
+        if (action == null) {
+            return "unknown";
+        }
+
+        String prefix = "Added user: ";
+        if (action.startsWith(prefix)) {
+            return action.substring(prefix.length()).trim();
+        }
+
+        prefix = "Removed user: ";
+        if (action.startsWith(prefix)) {
+            return action.substring(prefix.length()).trim();
+        }
+
+        prefix = "Updated user: ";
+        if (action.startsWith(prefix)) {
+            return action.substring(prefix.length()).trim();
+        }
+
         return "unknown";
     }
     
@@ -83,8 +107,7 @@ public class Admin extends Employee {
     
     @Override
     public String toString() {
-        // TODO: Extend Employee.toString() with admin metrics.
-        // Include number of managed users and number of log entries.
-        return "";
+        return String.format("%s, managedUsers=%d, logEntries=%d", 
+                             super.toString(), managedUsers.size(), userActionsLog.size());
     }
 }
