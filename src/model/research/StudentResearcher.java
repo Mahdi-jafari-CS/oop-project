@@ -2,10 +2,6 @@
 package model.research;
 
 import model.users.Student;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Concrete decorator for adding researcher functionality to Student objects
@@ -40,14 +36,18 @@ public class StudentResearcher extends ResearcherDecorator {
      * Check if student is in 4th year and needs a research supervisor
      */
     public boolean needsResearchSupervisor() {
-        // TODO: Delegate to underlying Student and return whether supervisor is still needed.
-        return false;
+        return student.needsResearchSupervisor();
     }
     
     @Override
     public String toString() {
-        // TODO: Return compact summary with student name, h-index, paper count, and project count.
-        return "";
+        return String.format(
+                "StudentResearcher{name='%s', hIndex=%d, papers=%d, projects=%d}",
+                student.getFullName(),
+                getHIndex(),
+                getResearchPapers().size(),
+                getResearchProjects().size()
+        );
     }
 }
 

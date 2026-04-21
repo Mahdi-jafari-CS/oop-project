@@ -124,9 +124,15 @@ public class ResearchPaper implements Serializable, Comparable<ResearchPaper> {
     
     // Calculate impact factor based on citations and publication date
     public double calculateImpactFactor() {
-        // TODO: Compute impact factor using citations and publication age.
-        // Suggested rule: citations / yearsSincePublication, with safe handling for null/recent dates.
-        return 0.0;
+        if (citations <= 0) return 0.0;
+        if (publicationDate == null) return (double) citations;
+
+        long yearsSincePublication = publicationDate.until(LocalDate.now()).getYears();
+        if (yearsSincePublication <= 0) {
+            yearsSincePublication = 1; // avoid division by zero for very recent papers
+        }
+
+        return (double) citations / yearsSincePublication;
     }
     
     // Check if paper is recent (published within last 2 years)
@@ -137,8 +143,11 @@ public class ResearchPaper implements Serializable, Comparable<ResearchPaper> {
     
     @Override
     public int compareTo(ResearchPaper other) {
-        // TODO: Compare papers by publication date (most recent first), null-safe.
-        return 0;
+        if (other == null) return -1;
+        if (publicationDate == null && other.publicationDate == null) return 0;
+        if (publicationDate == null) return 1;
+        if (other.publicationDate == null) return -1;
+        return other.publicationDate.compareTo(publicationDate);
     }
     
     @Override
@@ -156,17 +165,30 @@ public class ResearchPaper implements Serializable, Comparable<ResearchPaper> {
     
     @Override
     public String toString() {
-        // TODO: Return a compact one-line description of the paper.
-        // Include title, journal, year/date, citations, pages, and DOI when available.
-        return "";
+        String dateText = publicationDate == null ? "N/A" : publicationDate.toString();
+        String doiText = (doi == null || doi.isBlank()) ? "N/A" : doi;
+        return "ResearchPaper{title='" + title + "', journal='" + journal
+                + "', date=" + dateText + ", citations=" + citations
+                + ", pages=" + pages + ", doi='" + doiText + "'}";
     }
     
     /**
      * Get formatted citation in APA style
      */
     public String getFormattedCitation() {
-        // TODO: Build an APA-like citation string.
-        // Include up to first 3 authors (+ "et al." if more), year, title, journal, and DOI URL.
-        return "";
+        String authorText;
+        if (authors == null || authors.isEmpty()) {
+            authorText = "Unknown Author";
+        } else if (authors.size() <= 3) {
+            authorText = String.join(", ", authors);
+        } else {
+            authorText = String.join(", ", authors.subList(0, 3)) + ", et al.";
+        }
+
+        String yearText = publicationDate == null ? "n.d." : String.valueOf(publicationDate.getYear());
+        String journalText = (journal == null || journal.isBlank()) ? "Unknown Journal" : journal;
+        String doiText = (doi == null || doi.isBlank()) ? "" : " https://doi.org/" + doi;
+
+        return authorText + " (" + yearText + "). " + title + ". " + journalText + "." + doiText;
     }
 }

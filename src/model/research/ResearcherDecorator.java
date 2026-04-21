@@ -4,7 +4,6 @@ package model.research;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Abstract decorator class implementing Researcher interface
@@ -43,8 +42,21 @@ public abstract class ResearcherDecorator implements Researcher {
     
     @Override
     public void calculateHIndex() {
-        // TODO: Recompute hIndex from researchPapers using standard h-index algorithm.
-        this.hIndex = 0;
+        List<Integer> citations = researchPapers.stream()
+                .map(ResearchPaper::getCitations)
+                .sorted(Comparator.reverseOrder())
+                .collect(java.util.stream.Collectors.toList());
+
+        int calculatedHIndex = 0;
+        for (int i = 0; i < citations.size(); i++) {
+            int rank = i + 1;
+            if (citations.get(i) >= rank) {
+                calculatedHIndex = rank;
+            } else {
+                break;
+            }
+        }
+        this.hIndex = calculatedHIndex;
     }
     
     @Override
@@ -74,8 +86,27 @@ public abstract class ResearcherDecorator implements Researcher {
     
     @Override
     public void printPapers(Comparator<ResearchPaper> comparator) {
-        // TODO: Sort researchPapers using comparator and print a structured numbered list.
-        // Include at least title, journal, publication date, citations, pages, and DOI for each paper.
+        List<ResearchPaper> sortedPapers = new ArrayList<>(researchPapers);
+        Comparator<ResearchPaper> safeComparator = comparator != null
+                ? comparator
+                : model.comparators.ResearchPaperComparators.getComparator("date");
+        sortedPapers.sort(safeComparator);
+
+        if (sortedPapers.isEmpty()) {
+            System.out.println("No research papers found for " + getResearcherName() + ".");
+            return;
+        }
+
+        System.out.println("Research papers of " + getResearcherName() + ":");
+        for (int i = 0; i < sortedPapers.size(); i++) {
+            ResearchPaper paper = sortedPapers.get(i);
+            System.out.println((i + 1) + ". " + paper.getTitle());
+            System.out.println("   Journal: " + paper.getJournal());
+            System.out.println("   Date: " + paper.getPublicationDate());
+            System.out.println("   Citations: " + paper.getCitations());
+            System.out.println("   Pages: " + paper.getPages());
+            System.out.println("   DOI: " + paper.getDoi());
+        }
     }
     
     @Override
@@ -107,10 +138,22 @@ public abstract class ResearcherDecorator implements Researcher {
     
     @Override
     public String getResearcherStatistics() {
-        // TODO: Return a detailed multi-line statistics report.
-        // Include identity, h-index, publication/project counts, citation metrics,
-        // supervisor eligibility, and optionally most cited paper details.
-        return "";
+        ResearchPaper mostCited = getMostCitedPaper();
+        String mostCitedLine = mostCited == null
+                ? "N/A"
+                : mostCited.getTitle() + " (" + mostCited.getCitations() + " citations)";
+
+        return "Researcher Statistics\n"
+                + "====================\n"
+                + "ID: " + getResearcherId() + "\n"
+                + "Name: " + getResearcherName() + "\n"
+                + "h-index: " + getHIndex() + "\n"
+                + "Publications: " + researchPapers.size() + "\n"
+                + "Projects: " + researchProjects.size() + "\n"
+                + "Total citations: " + getTotalCitations() + "\n"
+                + "Average citations/paper: " + String.format("%.2f", getAverageCitationsPerPaper()) + "\n"
+                + "Qualifies as supervisor: " + (qualifiesAsSupervisor() ? "Yes" : "No") + "\n"
+                + "Most cited paper: " + mostCitedLine;
     }
     
     /**

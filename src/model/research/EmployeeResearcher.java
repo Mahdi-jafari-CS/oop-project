@@ -39,7 +39,12 @@ public class EmployeeResearcher extends ResearcherDecorator {
     
     @Override
     public String toString() {
-        // TODO: Return compact summary with employee name, h-index, paper count, and project count.
-        return "";
+        return String.format(
+                "EmployeeResearcher{name='%s', hIndex=%d, papers=%d, projects=%d}",
+                employee.getFullName(),
+                getHIndex(),
+                getResearchPapers().size(),
+                getResearchProjects().size()
+        );
     }
 }
