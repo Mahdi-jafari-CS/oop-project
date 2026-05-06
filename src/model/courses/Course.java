@@ -207,9 +207,20 @@ public class Course implements Serializable {
      * Get course information as formatted string
      */
     public String getCourseInfo() {
-        // TODO: Return a multi-line summary of this course.
-        // Include core metadata, counts (instructors/lessons/students), available spots, and total lesson hours.
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Course ID:         ").append(couseID).append("\n");
+        sb.append("Name:         ").append(courseName).append("\n");
+        sb.append("Description:         ").append(description).append("\n");
+        sb.append("Credits:         ").append(credits).append("\n");
+        sb.append("Major:         ").append(major).append("\n");
+        sb.append("Year required:         ").append(yearRequired).append("\n");
+        sb.append("Instructors count:         ").append(instructorIds.size()).append("\n");
+        sb.append("Lessons Count:         ").append(lessons.size()).append("\n");
+        sb.append("Students:        ").append(registeredStudentsIds.size())
+        .append("/").append(maxStudents).append("\n");
+        sb.append("Available spots:    ").append(getAvailableSpots()).append("\n");
+        sb.append("Total lesson hours:  ").append(getTotalLessonHour()).append("\n");
+        return sb.toString();
     }
     
     @Override
