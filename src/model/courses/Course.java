@@ -196,8 +196,11 @@ public class Course implements Serializable {
      * Get total lesson hours for this course
      */
     public int getTotalLessonHours() {
-        // TODO: Sum lesson durations in hours across all lessons.
-        return 0;
+        int total = 0;
+        for (Lesson lesson : lessons){
+            total += lesson.getDurationHours();
+        }
+        return total;
     }
     
     /**
