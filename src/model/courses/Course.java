@@ -146,12 +146,15 @@ public class Course implements Serializable {
      * @return true if registration successful, false if course is full
      */
     public boolean registerStudent(String studentId) {
-        // TODO: Implement registration logic.
-        // Rules:
-        // 1) Return false if course is full.
-        // 2) Add student only if not already registered.
-        // 3) Return true only when a new registration is added.
+        if (registeredStudentIds.size() >= maxStudents)
         return false;
+
+        if (registeredStudentsIds.contains(studentsId)){
+            return false;
+        }
+
+        registeredStudentIds.add(studentId);
+        return true;
     }
     
     /**
