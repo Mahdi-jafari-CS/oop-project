@@ -238,8 +238,11 @@ public class Course implements Serializable {
     
     @Override
     public String toString() {
-        // TODO: Return a compact single-line representation of Course.
-        // Example: "Course{id=CS101, name=OOP, credits=5, students=22/30}"
+        return "Course{id=" + courseId + 
+        ", name=" + courseName + 
+        ", credits=" + credits + 
+        ", students=" + registeredStudentIds.size() + "/" + maxStudents + 
+        "}";
         return "";
     }
 }
