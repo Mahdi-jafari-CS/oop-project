@@ -47,8 +47,13 @@ public class NotificationService {
      * Notify all observers of an event
      */
     public void notifyObservers(String eventType, String message, Object data) {
-        // TODO: Iterate through observers and call update(eventType, message, data).
-        // Use try/catch so one failing observer does not break the notification chain.
+         for (NotiicationObserver observer : observers){
+            try{
+                observer.update(evenType, message, data):
+            } catch (Exception e){
+                System.err.println("Notification observer failed: " + e.getMessage()):
+            }
+         }
     }
     
     /**
