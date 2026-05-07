@@ -169,8 +169,14 @@ public class Lesson implements Serializable {
     
     @Override
     public String toString() {
-        // TODO: Return a compact string representation of the lesson.
-        // Example: "Lesson{id=L001, type=LECTURE, topic=Math, day=MONDAY, time=10:00-12:00, room=201}"
-        return "";
-    }
+    String start = (startTime != null) ? startTime.toString() : "N/A";
+    String end   = (endTime   != null) ? endTime.toString()   : "N/A";
+    return "Lesson{id=" + lessonId +
+           ", type=" + type +
+           ", topic=" + topic +
+           ", day=" + dayOfWeek +
+           ", time=" + start + "-" + end +
+           ", room=" + room +
+           "}";
+}
 }
