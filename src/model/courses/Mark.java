@@ -222,8 +222,11 @@ public class Mark implements Serializable {
     
     @Override
     public String toString() {
-        // TODO: Return a compact summary string with studentId, courseId, totalMark, and grade.
-        return "";
+        return "Mark{studentId=" +cstudentId +
+        ", courseId=" + courseId + 
+        ",totalMark=" + totalMark +
+        ", grade=" + grade +
+        "}"};
     }
 }
 
