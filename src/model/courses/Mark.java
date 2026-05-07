@@ -124,9 +124,18 @@ public class Mark implements Serializable {
      * Calculate letter grade based on total mark
      */
     private void calculateGrade() {
-        // TODO: Map totalMark to a letter grade using the existing thresholds.
-        // Keep the final else branch for failing grade "F".
-        grade = "F";
+        if (totalMark >= 85){
+            grade = "A";
+        } else if (totalMark >= 70){
+            grade = "B";
+        } else if (totalMark >= 60){
+            grade = "C";
+        } else if (totalMark >= 50){
+            grade = "D";
+        } else {
+            grade = "F";
+        }
+        
     }
     
     /**
@@ -204,3 +213,5 @@ public class Mark implements Serializable {
         return "";
     }
 }
+
+
