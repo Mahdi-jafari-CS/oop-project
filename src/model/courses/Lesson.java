@@ -132,9 +132,11 @@ public class Lesson implements Serializable {
      * Get lesson schedule as formatted string
      */
     public String getScheduleString() {
-        // TODO: Return schedule in format "DAY HH:mm - HH:mm in ROOM".
-        // Use "N/A" when start/end times are missing.
-        return "";
+       String day = (dayOfWeek != null) ? dayOfWeek.toString() : "N/A";
+       String start = (startTime != null) ? startTime.toString() : "N/A";
+       String end = (endTime != null) ? endTime.toString() : "N/A";
+       String r = (room != nul) ? room : "N/A";
+       return day + " " start + " - " + end + " in " + r;
     }
     
     /**
