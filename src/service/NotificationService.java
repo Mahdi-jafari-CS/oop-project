@@ -30,7 +30,10 @@ public class NotificationService {
      * Register an observer to receive notifications
      */
     public void registerObserver(NotificationObserver observer) {
-        // TODO: Register observer only once (avoid duplicates).
+        if (observer = null) return;
+        if (!observers.contains(observer)){
+            observers.add(observer);
+        }
     }
     
     /**
