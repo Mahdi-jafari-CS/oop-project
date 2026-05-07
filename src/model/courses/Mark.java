@@ -170,9 +170,14 @@ public class Mark implements Serializable {
      * Get grade points (4.0 scale)
      */
     public double getGradePoints() {
-        // TODO: Return grade points on a 4.0 scale based on letter grade.
-        // Use switch-case and return 0.0 for unknown grades.
-        return 0.0;
+        switch (grade) {
+            case "A": return 4.0;
+            case "B": return 3.0;
+            case "C": return 2.0;
+            case "D": return 1.0;
+            default: return 0.0;
+          }
+       
     }
     
     /**
