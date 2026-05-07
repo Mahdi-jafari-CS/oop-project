@@ -193,10 +193,18 @@ public class Mark implements Serializable {
      * Get mark breakdown as formatted string
      */
     public String getMarkBreakdown() {
-        // TODO: Build and return a formatted multi-line mark report.
-        // Include attestation components, final exam, total, letter grade, grade points, and pass/fail status.
-        return "";
-    }
+    StringBuilder sb = new StringBuilder();
+    sb.append("Mark breakdown for student ").append(studentId)
+      .append(" in course ").append(courseId).append(":\n");
+    sb.append("  First attestation:  ").append(firstAttestation).append(" / 30\n");
+    sb.append("  Second attestation: ").append(secondAttestation).append(" / 30\n");
+    sb.append("  Final exam:         ").append(finalExam).append(" / 40\n");
+    sb.append("  Total:              ").append(totalMark).append(" / 100\n");
+    sb.append("  Letter grade:       ").append(grade).append("\n");
+    sb.append("  Grade points (GPA): ").append(getGradePoints()).append("\n");
+    sb.append("  Status:             ").append(isPassing() ? "PASS" : "FAIL").append("\n");
+    return sb.toString();
+}
     
     @Override
     public boolean equals(Object o) {
