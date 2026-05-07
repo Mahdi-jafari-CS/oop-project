@@ -119,9 +119,13 @@ public class Lesson implements Serializable {
      * Check if this lesson overlaps with another lesson
      */
     public boolean overlapsWith(Lesson other) {
-        // TODO: Return true when two lessons are on the same day and their time intervals overlap.
-        // Handle null day/time values safely and return false when comparison is impossible.
-        return false;
+        if (other == null) return false;
+        if (this.dayOfWeek == null || other.dayOfWeek == null) return false;
+        if (this.dayOfWeek != other.dayOfWeek) return false;
+        if (this.startTime == null || this.endTime == null
+                || other.startTime == null || other.endTime == null) return false;
+        return this.startTime.isBefore(other.endTime)
+                && other.startTime.isBefore(this.endTime);
     }
     
     /**
