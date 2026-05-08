@@ -222,11 +222,11 @@ public class Mark implements Serializable {
     
     @Override
     public String toString() {
-        return "Mark{studentId=" +cstudentId +
+        return "Mark{studentId=" + studentId +
         ", courseId=" + courseId + 
         ",totalMark=" + totalMark +
         ", grade=" + grade +
-        "}"};
+        "}";
     }
 }
 

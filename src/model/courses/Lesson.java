@@ -135,8 +135,8 @@ public class Lesson implements Serializable {
        String day = (dayOfWeek != null) ? dayOfWeek.toString() : "N/A";
        String start = (startTime != null) ? startTime.toString() : "N/A";
        String end = (endTime != null) ? endTime.toString() : "N/A";
-       String r = (room != nul) ? room : "N/A";
-       return day + " " start + " - " + end + " in " + r;
+       String r = (room != null) ? room : "N/A";
+       return day + " " + start + " - " + end + " in " + r;
     }
     
     /**

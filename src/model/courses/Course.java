@@ -149,7 +149,7 @@ public class Course implements Serializable {
         if (registeredStudentIds.size() >= maxStudents)
         return false;
 
-        if (registeredStudentsIds.contains(studentsId)){
+        if (registeredStudentIds.contains(studentId)){
             return false;
         }
 
@@ -208,7 +208,7 @@ public class Course implements Serializable {
      */
     public String getCourseInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Course ID:         ").append(couseID).append("\n");
+        sb.append("Course ID:         ").append(courseId).append("\n");
         sb.append("Name:         ").append(courseName).append("\n");
         sb.append("Description:         ").append(description).append("\n");
         sb.append("Credits:         ").append(credits).append("\n");
@@ -216,10 +216,10 @@ public class Course implements Serializable {
         sb.append("Year required:         ").append(yearRequired).append("\n");
         sb.append("Instructors count:         ").append(instructorIds.size()).append("\n");
         sb.append("Lessons Count:         ").append(lessons.size()).append("\n");
-        sb.append("Students:        ").append(registeredStudentsIds.size())
+        sb.append("Students:        ").append(registeredStudentIds.size())
         .append("/").append(maxStudents).append("\n");
         sb.append("Available spots:    ").append(getAvailableSpots()).append("\n");
-        sb.append("Total lesson hours:  ").append(getTotalLessonHour()).append("\n");
+        sb.append("Total lesson hours:  ").append(getTotalLessonHours()).append("\n");
         return sb.toString();
     }
     
@@ -243,6 +243,6 @@ public class Course implements Serializable {
         ", credits=" + credits + 
         ", students=" + registeredStudentIds.size() + "/" + maxStudents + 
         "}";
-        return "";
+       
     }
 }

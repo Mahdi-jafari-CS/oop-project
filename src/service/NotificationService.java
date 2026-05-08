@@ -30,7 +30,7 @@ public class NotificationService {
      * Register an observer to receive notifications
      */
     public void registerObserver(NotificationObserver observer) {
-        if (observer = null) return;
+        if (observer == null) return;
         if (!observers.contains(observer)){
             observers.add(observer);
         }
@@ -47,11 +47,11 @@ public class NotificationService {
      * Notify all observers of an event
      */
     public void notifyObservers(String eventType, String message, Object data) {
-         for (NotiicationObserver observer : observers){
+         for (NotificationObserver observer : observers){
             try{
-                observer.update(evenType, message, data):
+                observer.update(eventType, message, data);
             } catch (Exception e){
-                System.err.println("Notification observer failed: " + e.getMessage()):
+                System.err.println("Notification observer failed: " + e.getMessage());
             }
          }
     }
